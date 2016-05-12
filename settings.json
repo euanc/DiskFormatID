@@ -1,0 +1,1 @@
+{"outputFormats": [{"Image type": "-i4"}, {"Image type": "-i10"}, {"Image type": "-i9"}], "mainSettings": [{"Output directory": "/home/euan/kryo/output/", "DTC directory": "/home/euan/kryo/kryoflux_2.6_linux/dtc/", "Input directory": "/home/euan/kryo/smallTest/", "Delete unmountable": "TRUE"}]}

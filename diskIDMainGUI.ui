@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>kryoMain</class>
+ <widget class="QMainWindow" name="kryoMain">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>770</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Disk format identifier</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="chooseFormats">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>10</y>
+      <width>201</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Choose formats to create</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="createImages">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>50</y>
+      <width>201</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Create images</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="tryMounting">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>330</y>
+      <width>191</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Try mounting</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="imageCreationResults">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>140</y>
+      <width>711</width>
+      <height>181</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="MountingResults">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>360</y>
+      <width>711</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="deleteUnmountable">
+    <property name="geometry">
+     <rect>
+      <x>225</x>
+      <y>333</y>
+      <width>171</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Delete unmountable</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="browseOutputDir">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>80</y>
+      <width>141</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Output Directory</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="browseInpDir">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>46</y>
+      <width>141</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Input Directory</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="browseDTCDir">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>10</y>
+      <width>141</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>DTC Directory</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="inputDir">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>46</y>
+      <width>331</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="outputDir">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>80</y>
+      <width>331</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="DTCDir">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>11</y>
+      <width>331</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="saveMountingResults">
+    <property name="geometry">
+     <rect>
+      <x>601</x>
+      <y>330</y>
+      <width>141</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save Results</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>319</y>
+      <width>711</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="saveDTCResults">
+    <property name="geometry">
+     <rect>
+      <x>601</x>
+      <y>109</y>
+      <width>141</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save Results</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="DTCInstances">
+    <property name="geometry">
+     <rect>
+      <x>503</x>
+      <y>109</y>
+      <width>41</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>253</x>
+      <y>115</y>
+      <width>261</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Maximum concurrent DTC instances:</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>770</width>
+     <height>25</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>chooseFormats</sender>
+   <signal>clicked()</signal>
+   <receiver>kryoMain</receiver>
+   <slot>choose_formats()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>173</x>
+     <y>61</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>295</x>
+     <y>72</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>createImages</sender>
+   <signal>clicked()</signal>
+   <receiver>kryoMain</receiver>
+   <slot>create_images()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>183</x>
+     <y>109</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>253</x>
+     <y>85</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tryMounting</sender>
+   <signal>clicked()</signal>
+   <receiver>kryoMain</receiver>
+   <slot>try_mounting()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>170</x>
+     <y>369</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>9</x>
+     <y>332</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>browseDTCDir</sender>
+   <signal>clicked()</signal>
+   <receiver>kryoMain</receiver>
+   <slot>browse_dtc_dir()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>349</x>
+     <y>49</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>17</x>
+     <y>77</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>browseInpDir</sender>
+   <signal>clicked()</signal>
+   <receiver>kryoMain</receiver>
+   <slot>browse_inp_dir()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>383</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>397</x>
+     <y>94</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>browseOutputDir</sender>
+   <signal>clicked()</signal>
+   <receiver>kryoMain</receiver>
+   <slot>browse_output_dir()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>350</x>
+     <y>121</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>401</x>
+     <y>121</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>deleteUnmountable</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>kryoMain</receiver>
+   <slot>delete_unmountable_change()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>354</x>
+     <y>361</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>486</x>
+     <y>335</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveMountingResults</sender>
+   <signal>clicked()</signal>
+   <receiver>kryoMain</receiver>
+   <slot>save_mounting_results()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>649</x>
+     <y>366</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>762</x>
+     <y>363</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveDTCResults</sender>
+   <signal>clicked()</signal>
+   <receiver>kryoMain</receiver>
+   <slot>save_dtc_results()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>717</x>
+     <y>331</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>757</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>choose_formats()</slot>
+  <slot>create_images()</slot>
+  <slot>try_mounting()</slot>
+  <slot>delete_unmountable_change()</slot>
+  <slot>browse_dtc_dir()</slot>
+  <slot>browse_inp_dir()</slot>
+  <slot>browse_output_dir()</slot>
+  <slot>save_dtc_results()</slot>
+  <slot>save_mounting_results()</slot>
+ </slots>
+</ui>
