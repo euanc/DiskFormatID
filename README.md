@@ -25,7 +25,7 @@ Run the program as root with:
 Click "choose formats" to select disk image formats to be created
 Select input and output folders and specify the directory containing the Kryoflux DTC application. These settings (including selected formats) will be saved in "settings.json" 
 
-NB: the program license must already have been agreed to by navigating to the dtc directory in a terminal winwdow and running the GUI with:
+NB: the program license must already have been agreed to by navigating to the dtc directory in a terminal window and running the GUI with:
 
 java -jar kryoflux-ui.jar
 
@@ -38,3 +38,4 @@ Click a button to mount the disk image files and get feedback on which files cou
 
 Click either of the "save results" buttons to save the results from the corresponding window to a file (extension will be added automatically). 
 
+All created disk images will be have root permissions assigned, you may need to change that after using the program. 
