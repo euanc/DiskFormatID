@@ -219,7 +219,7 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
                 self.MountingResults.append("------------------------------------------------")
                 self.MountingResults.append(" ")
     self.MountingResults.append
-    self.MountingResults.append("Creation of images complete")
+    self.MountingResults.append("Mounting process complete")
     self.MountingResults.append(" ")
     self.MountingResults.append("------------------------------------------------")       
   
