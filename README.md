@@ -1,6 +1,8 @@
 # DiskFormatID
 
-This program is intended to help to identify floppy disk formats. 
+This program is intended to help to identify floppy disk formats.  It takes http://www.Kryoflux.com stream files as input. 
+
+Please support http://kryoflux.com/ !
 
 To use:
 Run the program as root with:
@@ -22,8 +24,3 @@ Click a button to mount the disk image files and get feedback on which files cou
 
 Click either of the "save results" buttons to save the results from the corresponding window to a file (extension will be added automatically). 
 
-  
-
-
-
-# DiskFormatID
