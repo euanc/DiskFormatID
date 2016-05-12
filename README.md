@@ -1,5 +1,8 @@
 # DiskFormatID
 
+More information is available in this blog post: http://digitalcontinuity.org/post/144268258748/floppy-disk-format-identifer-tool
+
+
 This program is intended to help to identify floppy disk formats.  It takes a folder of http://www.Kryoflux.com stream files as input. It only works with linux and requires
 
 python 2.7
