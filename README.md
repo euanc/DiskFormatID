@@ -3,7 +3,9 @@
 This program is intended to help to identify floppy disk formats.  It takes a folder of http://www.Kryoflux.com stream files as input. It only works with linux and requires
 
 python 2.7
+
 pyqt4
+
 mount
 
 At some point I'll figure out how to package it all up, but for now you'll have to add the dependencies yourself. Should be fairly straight forward in most linux distributions, e.g. BitCurator. Almost all come with mount and python (2.x) already installed. 
