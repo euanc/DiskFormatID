@@ -113,7 +113,7 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
           outdir = os.path.join(dest_dir, subdirname.replace(" ","_"))
 
           for trackFile in os.listdir(indirname):
-          
+            self.imageCreationResults.append("copying track " + str(os.path.join(indirname,trackFile)))
             shutil.copyfile(os.path.join(indirname,trackFile),os.path.join(outTrackDir,trackFile))
  
     
