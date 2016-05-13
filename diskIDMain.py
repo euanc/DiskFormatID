@@ -181,50 +181,51 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
     # for each of those find the files in them
       for subdirname in dirnames:
         indirname = os.path.join(dirname,subdirname)
+        
     
     #for each disk image file in that directory
         for dirname2, dirnames2, filenames2 in os.walk(indirname):
           for filenm in filenames2:
-    
+            if not "track" in str(os.path.join(dest_dir, indirname, filenm)):
     # for each file, mount it and put the resulting errors into a variable p.stderr
      #update the text browser with the status
-            self.MountingResults.append("Trying to mount " + str(filenm))
+              self.MountingResults.append("Trying to mount " + str(filenm))
 # process the update to the gui
-            QtGui.QApplication.processEvents()
-            p = subprocess.Popen(["mount", "-O loop", os.path.join(dest_dir, indirname, filenm), "/mnt"], stderr=subprocess.PIPE)
+              QtGui.QApplication.processEvents()
+              p = subprocess.Popen(["mount", "-O loop", os.path.join(dest_dir, indirname, filenm), "/mnt"], stderr=subprocess.PIPE)
     
     # if there is no error then umount the disk image
-            if p.stderr.readline() == "":
+              if p.stderr.readline() == "":
      #update the text browser with the status
-              self.MountingResults.append(str(filenm) + " mounted successfully")
-# process the update to the gui
-              QtGui.QApplication.processEvents()
-              subprocess.call(["umount", "/mnt"])
-              self.MountingResults.append(" ")
-              self.MountingResults.append("------------------------------------------------")
-              self.MountingResults.append(" ")
-  
-                   
-            else:
-#update the text browser with the status
-              self.MountingResults.append(str(filenm) + " mounting failed")
-
-# process the update to the gui
-              QtGui.QApplication.processEvents()
-              if self.deleteUnmountable.isChecked():
-#update the text browser with the status
-                self.MountingResults.append("Deleting " + str(filenm))
-                self.MountingResults.append(" ")
-                self.MountingResults.append("------------------------------------------------")
-                self.MountingResults.append(" ")
+                self.MountingResults.append(str(filenm) + " mounted successfully")
 # process the update to the gui
                 QtGui.QApplication.processEvents()
-                subprocess.call(["rm", os.path.join(dest_dir, indirname, filenm)])
-              else:
-                
+                subprocess.call(["umount", "/mnt"])
                 self.MountingResults.append(" ")
                 self.MountingResults.append("------------------------------------------------")
                 self.MountingResults.append(" ")
+  
+                   
+              else:
+#update the text browser with the status
+                self.MountingResults.append(str(filenm) + " mounting failed")
+
+# process the update to the gui
+                QtGui.QApplication.processEvents()
+                if self.deleteUnmountable.isChecked():
+#update the text browser with the status
+                  self.MountingResults.append("Deleting " + str(filenm))
+                  self.MountingResults.append(" ")
+                  self.MountingResults.append("------------------------------------------------")
+                  self.MountingResults.append(" ")
+# process the update to the gui
+                  QtGui.QApplication.processEvents()
+                  subprocess.call(["rm", os.path.join(dest_dir, indirname, filenm)])
+                else:
+                
+                  self.MountingResults.append(" ")
+                  self.MountingResults.append("------------------------------------------------")
+                  self.MountingResults.append(" ")
     self.MountingResults.append
     self.MountingResults.append("Mounting process complete")
     self.MountingResults.append(" ")
