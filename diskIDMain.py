@@ -108,8 +108,8 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
     # create directories to copy the streamfiles to, as the directories have to have no spaces in them, then copy the files to those directories
    
           outTrackDir = os.path.join(dest_dir,subdirname.replace(" ","_"),"track")
-        
-          os.makedirs(outTrackDir)
+          if not os.path.exists(outTrackDir):
+            os.makedirs(outTrackDir)
           outdir = os.path.join(dest_dir, subdirname.replace(" ","_"))
 
           for trackFile in os.listdir(indirname):
