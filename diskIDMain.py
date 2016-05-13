@@ -1,12 +1,13 @@
 #!/usr/bin/env python2
 from PyQt4 import QtGui, QtCore
-
+from distutils.dir_util import copy_tree
 import sys
 import os
 import diskIDMainGUI
 import chooseFormats 
 import subprocess
 import json
+import shutil
 import sys
 from subprocess import Popen
 from subprocess import check_output
@@ -66,7 +67,8 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
     
     self.addTypes = chooseFormats.addTypes()
     self.addTypes.show()
-    
+
+  
 # function below takes input from create images button and creates the images
 
   
@@ -97,27 +99,32 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
     
     # create a variable to use for the sub directory paths
         indirname = os.path.join(dirname, subdirname)
+        #print str(indirname)
       
-    
+   
     # check each sub directory to see if it has a stream file in it
         if os.path.isfile(os.path.join(indirname, "track00.0.raw")) == True:
     
-    # define a variable equal to the path for the folder to put the images in. The path will be named with the stream file name
-          outdir = os.path.join(dest_dir, subdirname)
-    
-    # if the directory to put the files in doesn't exist then create it
-          if os.path.exists(outdir) == False:
-            os.makedirs(outdir)
-    
-    # and make the directory readable and writeable by all
-            os.chmod(outdir, 0o666)
+    # create directories to copy the streamfiles to, as the directories have to have no spaces in them, then copy the files to those directories
+   
+          outTrackDir = os.path.join(dest_dir,subdirname.replace(" ","_"),"track")
+        
+          os.makedirs(outTrackDir)
+          outdir = os.path.join(dest_dir, subdirname.replace(" ","_"))
+
+          for trackFile in os.listdir(indirname):
+          
+            shutil.copyfile(os.path.join(indirname,trackFile),os.path.join(outTrackDir,trackFile))
+ 
     
     
           
   #setup a variable to form each command into    
           for format in data["outputFormats"]:
             command = set()
-            filepath =  outdir + "/" + subdirname
+            
+            filepath = os.path.join(outdir, subdirname.replace(" ","_"))
+            #print str(trackPath)
       
             for param in format:
               if command != "":        
@@ -128,8 +135,8 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
                 command = format[param]   
                 filepath = filepath + format[param]            
         
-            commands.append((dtc_dir + "./dtc", "-f" + str(filepath) + ".img", "-m1", ", ".join([str(x) for x in command]), "-f" + indirname + "/track","-i0"))
-   
+            commands.append((dtc_dir + "./dtc", "-f" + str(filepath) + ".img", "-m1", ", ".join([str(x) for x in command]), "-f" + outTrackDir + "/track","-i0"))
+    
 
     			
     # Now run the commands in paralell
