@@ -39,6 +39,23 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
     # set the dtc max concurrent isntances box to default to 1
     self.DTCInstances.setText("1")
 
+    # Check for existence of settings file for local user. If it doesn't
+    # exist (e.g. on first use) warn and create)
+
+    spath = os.getenv("HOME") + '/.diskFormatID/settings.json'
+    if not os.path.exists(spath):
+
+      QtGui.QMessageBox.warning(self, "Cannot open file",
+                    "The selected file could not be opened.",
+                    QtGui.QMessageBox.Cancel, QtGui.QMessageBox.NoButton,
+                    QtGui.QMessageBox.NoButton)
+
+      os.mkdir(os.getenv("HOME") + '/.diskFormatID')
+      sfile = open(spath, 'w+')
+      sfile.write('{"outputFormats": [{"Image type": "-i4"}, {"Image type": "-i10"}, {"Image type": "-i9"}], "mainSettings": [{"Output directory": "/home/euan/kryo/output/", "DTC directory": "/home/euan/kryo/kryoflux_2.6_linux/dtc/", "Input directory": "/home/euan/kryo/smallTest/", "Delete unmountable": "TRUE"}]}')
+      sfile.close()
+
+
     #open the settings.json file for reading
     if os.stat('settings.json').st_size != 0:
       with open('settings.json') as settings_file:    
