@@ -39,7 +39,7 @@ NB: the program license must already have been agreed to by navigating to the dt
 
 java -jar kryoflux-ui.jar
 
-Then accpeting the prompt.
+Then accepting the prompt.
 
 Choose how many concurrent dtc instances you want to run to create the disk images.
 Click "create images" to use a local copy of the Kryoflux DTC program to create the image files from a folder containing folders of raw Kryoflux stream files. NB: the interface may lock up and not update the results for a indeterminate period of time. 
