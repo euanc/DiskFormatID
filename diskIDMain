@@ -28,7 +28,7 @@ spath = os.getenv("HOME") + '/.diskFormatID/settings.json'
 
 class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
   def __init__(self, parent=None):
-    #don't really understand global variables well enough, but I think I need to ptu these here
+    #don't really understand global variables well enough, but I think I need to put these here
     global inpDirLoc
     
     global outDirLoc
@@ -47,7 +47,7 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
     if not os.path.exists(spath):
 
       QtGui.QMessageBox.warning(self, "First run notice",
-                    "It looks like you're running the program for the first time as this user. I'm create a new default settings file for you in " + spath,
+                    "It looks like you're running the program for the first time as this user. I'm creating a new default settings file for you in " + spath,
                     QtGui.QMessageBox.Ok, QtGui.QMessageBox.NoButton,
                     QtGui.QMessageBox.NoButton)
 

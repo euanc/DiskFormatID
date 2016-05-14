@@ -31,9 +31,12 @@ driveDensitiesRv = {"-dd0":"High","-dd1":"Low"}
 outputTrackOrders = {"Side 0 descending":"-oo1","Side 1 descending":"-oo2","Side 1 then side 0":"-oo4","Side oriented":"-oo8"}
 outputTrackOrdersRv = {'-oo1': 'Side 0 descending', '-oo8': 'Side oriented', '-oo2': 'Side 1 descending', '-oo4': 'Side 1 then side 0'}
 
+global spath
+spath = os.getenv("HOME") + '/.diskFormatID/settings.json'
 
 class addTypes(QtGui.QMainWindow, chooseFormatsGUI.Ui_addTypes):
   def __init__(self, parent=None):
+    global spath
     super(addTypes, self).__init__(parent)
     self.setupUi(self)
     self.imageTypeCB.clear()
@@ -70,18 +73,18 @@ class addTypes(QtGui.QMainWindow, chooseFormatsGUI.Ui_addTypes):
     self.resetTypes.clicked.connect(self.reset_types)
 
      
-#open the settings.json file for reading
-    if os.stat('settings.json').st_size != 0:  
+#open the spath file for reading
+    if os.stat(spath).st_size != 0:  
       self.updateTextBrowserFromJSON()
     else:
      #pass if file is empty
       pass
 
   def reset_types(self):
-
+    global spath
 #open the json file and get the contents
     
-    with open('settings.json' ,'r') as settings_file:   
+    with open(spath ,'r') as settings_file:   
      
       settings = json.load(settings_file)
 # try deleting the  outputFormats element/key
@@ -91,7 +94,7 @@ class addTypes(QtGui.QMainWindow, chooseFormatsGUI.Ui_addTypes):
         pass
 #write back the remaining json      
       jsoutput = json.dumps(settings)
-      outfile = open("settings.json", 'w')
+      outfile = open("spath", 'w')
       outfile.write(jsoutput)
       outfile.close()
      
@@ -102,13 +105,13 @@ class addTypes(QtGui.QMainWindow, chooseFormatsGUI.Ui_addTypes):
 
   def save_and_add(self):
  # this function adds what is in each setting to the json file
+    global spath
 
+#check to see if the spath file is empty
 
-#check to see if the settings.json file is empty
-
-    if os.stat('settings.json').st_size != 0:
+    if os.stat(spath).st_size != 0:
 # if it is not empty open it for reading
-      with open('settings.json','r') as settings_file:    
+      with open(spath,'r') as settings_file:    
         settings = json.load(settings_file)
 #create a variable to store the current input in the image type comobo box        
         imgType = imageTypes[str(self.imageTypeCB.currentText())]
@@ -152,17 +155,17 @@ class addTypes(QtGui.QMainWindow, chooseFormatsGUI.Ui_addTypes):
           settings["outputFormats"] = [diskSetting]
 #Clear the json file and write back the updated json
         jsoutput = json.dumps(settings)
-        outfile = open("settings.json", 'w')
+        outfile = open("spath", 'w')
         outfile.write(jsoutput)
         outfile.close()
       self.settingsDisplay.clear()
 #clear the settings text browser in the GUI
-#open the settings.json file and print the contents to the text browser in the gui, one per format instance
+#open the spath file and print the contents to the text browser in the gui, one per format instance
   
       self.updateTextBrowserFromJSON()
 
     else:
-#if the settings.json file is empty you should put something into it     
+#if the spath file is empty you should put something into it     
 
 #this is a hangover from earlier versions where I needed to id/process the imagetype ina a unique way 
       imgType = imageTypes[str(self.imageTypeCB.currentText())]
@@ -203,15 +206,17 @@ class addTypes(QtGui.QMainWindow, chooseFormatsGUI.Ui_addTypes):
 #now write this all back
       settings = {"outputFormats":[diskSetting]}
       jsoutput = json.dumps(settings)
-      outfile = open("settings.json", 'w')
+      outfile = open("spath", 'w')
       outfile.write(jsoutput)
       outfile.close()
       self.settingsDisplay.clear()
       self.updateTextBrowserFromJSON()
 
   def updateTextBrowserFromJSON(self):
+
+    global spath
 #used to update what is in the textbrowser box in the GUI from the JSON file
-    with open('settings.json') as settings_file:    
+    with open(spath) as settings_file:    
       num = 0
       settings = json.load(settings_file)
 # get all the formats already stored in the file
