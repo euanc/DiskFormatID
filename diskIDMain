@@ -9,6 +9,7 @@ import subprocess
 import json
 import shutil
 import sys
+import getpass
 from subprocess import Popen
 from subprocess import check_output
 from itertools import islice
@@ -23,6 +24,7 @@ impDirLoc = ""
 outDirLoc = ""
 dtcDirLoc = ""
 
+spath = os.getenv("HOME") + '/.diskFormatID/settings.json'
 
 class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
   def __init__(self, parent=None):
@@ -42,12 +44,11 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
     # Check for existence of settings file for local user. If it doesn't
     # exist (e.g. on first use) warn and create)
 
-    spath = os.getenv("HOME") + '/.diskFormatID/settings.json'
     if not os.path.exists(spath):
 
-      QtGui.QMessageBox.warning(self, "Cannot open file",
-                    "The selected file could not be opened.",
-                    QtGui.QMessageBox.Cancel, QtGui.QMessageBox.NoButton,
+      QtGui.QMessageBox.warning(self, "First run notice",
+                    "It looks like you're running the program for the first time as this user. I'm create a new default settings file for you in " + spath,
+                    QtGui.QMessageBox.Ok, QtGui.QMessageBox.NoButton,
                     QtGui.QMessageBox.NoButton)
 
       os.mkdir(os.getenv("HOME") + '/.diskFormatID')
@@ -55,10 +56,15 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
       sfile.write('{"outputFormats": [{"Image type": "-i4"}, {"Image type": "-i10"}, {"Image type": "-i9"}], "mainSettings": [{"Output directory": "/home/euan/kryo/output/", "DTC directory": "/home/euan/kryo/kryoflux_2.6_linux/dtc/", "Input directory": "/home/euan/kryo/smallTest/", "Delete unmountable": "TRUE"}]}')
       sfile.close()
 
+    # Probably need to change ownership settings if this program 
+    # is being run as root, and the user later decides to run it 
+    # as themselves. Fix this ina  future version. Right now, 
+    # the settings directory and file installed in the dot-directory 
+    # will be root-owned if run as sudo.
 
     #open the settings.json file for reading
-    if os.stat('settings.json').st_size != 0:
-      with open('settings.json') as settings_file:    
+    if os.stat(spath).st_size != 0:
+      with open(spath) as settings_file:    
       
     #set main settings to values from settings json file
         settings = json.load(settings_file)
@@ -96,7 +102,7 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
     
     global dtcDirLoc
     
-    with open('settings.json') as data_file:    
+    with open(spath) as data_file:    
       data = json.load(data_file)
        
     # set input variables for the source and destination file directories and dtc directory
@@ -252,9 +258,9 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
   
   def delete_unmountable_change(self):
     
-    if os.stat('settings.json').st_size != 0:
+    if os.stat(spath).st_size != 0:
 # if it is not empty open it for reading
-      with open('settings.json','r') as settings_file: 
+      with open(spath,'r') as settings_file: 
         settings = json.load(settings_file)
         if self.deleteUnmountable.isChecked():
           for setting in settings["mainSettings"]:
@@ -264,7 +270,7 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
           for setting in settings["mainSettings"]:
             setting["Delete unmountable"] = "FALSE"
         jsoutput = json.dumps(settings)
-        outfile = open("settings.json", 'w')
+        outfile = open(spath, 'w')
         outfile.write(jsoutput)
         outfile.close()
 
@@ -276,15 +282,15 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
     dtcDirLoc = str(dtcDirLoc)
     self.DTCDir.setText(dtcDirLoc)
     
-    if os.stat('settings.json').st_size != 0:
+    if os.stat(spath).st_size != 0:
 # if it is not empty open it for reading
-      with open('settings.json','r') as settings_file: 
+      with open(spath,'r') as settings_file: 
         settings = json.load(settings_file)
         for setting in settings["mainSettings"]:
            setting["DTC directory"] = str(dtcDirLoc)
 
         jsoutput = json.dumps(settings)
-        outfile = open("settings.json", 'w')
+        outfile = open(spath, 'w')
         outfile.write(jsoutput)
         outfile.close()
 
@@ -297,15 +303,15 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
     inpDirLoc = str(inpDirLoc)
     self.inputDir.setText(inpDirLoc)
     
-    if os.stat('settings.json').st_size != 0:
+    if os.stat(spath).st_size != 0:
 # if it is not empty open it for reading
-      with open('settings.json','r') as settings_file: 
+      with open(spath,'r') as settings_file: 
         settings = json.load(settings_file)
         for setting in settings["mainSettings"]:
            setting["Input directory"] = str(inpDirLoc)
 
         jsoutput = json.dumps(settings)
-        outfile = open("settings.json", 'w')
+        outfile = open(spath, 'w')
         outfile.write(jsoutput)
         outfile.close()
   
@@ -345,15 +351,15 @@ class kryoMain(QtGui.QMainWindow, diskIDMainGUI.Ui_kryoMain):
     outDirLoc = str(outDirLoc)
     self.outputDir.setText(outDirLoc)
     
-    if os.stat('settings.json').st_size != 0:
+    if os.stat(spath).st_size != 0:
 # if it is not empty open it for reading
-      with open('settings.json','r') as settings_file: 
+      with open(spath,'r') as settings_file: 
         settings = json.load(settings_file)
         for setting in settings["mainSettings"]:
            setting["Output directory"] = str(outDirLoc)
          
         jsoutput = json.dumps(settings)
-        outfile = open("settings.json", 'w')
+        outfile = open(spath, 'w')
         outfile.write(jsoutput)
         outfile.close()
 
