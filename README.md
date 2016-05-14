@@ -19,11 +19,18 @@ Please support http://kryoflux.com/ !
 To use:
 Clone the repository or download all the files using the download zip button and extract them to a folder (not all are actually needed).
 
-Run the program as root with:
+In the DiskFormatID directory, build and install the program for all users as follows:
 
-"sudo python diskIDMain.py"
+python setup.py build
+sudo python setup.py install
+
+Now, you can run the program as root from any location with:
+
+"sudo diskIDMain"
 
 (If you properly install DTC according to the instructions in the Kryoflux documentation then you may not need to run it as root).
+
+The first time you start the program, you will see a warning that informs you a new settings file is being created. This settings file is located in the .diskFormatID directory within your home directory.
 
 Click "choose formats" to select disk image formats to be created
 Select input and output folders and specify the directory containing the Kryoflux DTC application. These settings (including selected formats) will be saved in "settings.json" 
