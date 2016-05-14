@@ -1,12 +1,3 @@
-# Placeholder for future packaging
+# Minimal init for DiskFormatID. Update for future releases.
 __license__ = "GPL 3.0"
-__version__ = "0.1.0"
-#__all__ = ['libredact']
-
-#from .diskID_config import *
-
-#try:
-#    from .diskID import diskID_sample
-#except ImportError:
-#    import warnings
-#    warnings.warn("Dep X not installed. Needed for diskID.")
+__version__ = "1.0.0"
