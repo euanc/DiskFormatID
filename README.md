@@ -11,7 +11,7 @@ pyqt4
 
 mount
 
-Kam Woods packaged it with setuptools, (https://twitter.com/kamwoods) thanks Kam! 
+Kam Woods packaged it with setuptools, (https://twitter.com/kamwoods) thanks Kam! You will need the python-setuptools installed on your system to install it. 
 
 
 Please support http://kryoflux.com/ !
