@@ -94,7 +94,7 @@ class addTypes(QtGui.QMainWindow, chooseFormatsGUI.Ui_addTypes):
         pass
 #write back the remaining json      
       jsoutput = json.dumps(settings)
-      outfile = open("spath", 'w')
+      outfile = open(spath, 'w')
       outfile.write(jsoutput)
       outfile.close()
      
@@ -155,7 +155,7 @@ class addTypes(QtGui.QMainWindow, chooseFormatsGUI.Ui_addTypes):
           settings["outputFormats"] = [diskSetting]
 #Clear the json file and write back the updated json
         jsoutput = json.dumps(settings)
-        outfile = open("spath", 'w')
+        outfile = open(spath, 'w')
         outfile.write(jsoutput)
         outfile.close()
       self.settingsDisplay.clear()
@@ -206,7 +206,7 @@ class addTypes(QtGui.QMainWindow, chooseFormatsGUI.Ui_addTypes):
 #now write this all back
       settings = {"outputFormats":[diskSetting]}
       jsoutput = json.dumps(settings)
-      outfile = open("spath", 'w')
+      outfile = open(spath, 'w')
       outfile.write(jsoutput)
       outfile.close()
       self.settingsDisplay.clear()
